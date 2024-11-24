@@ -49,9 +49,10 @@ public class App {
         car.stop();
 
         float availableFuel = car.getAvailableFuel();
+        System.out.println(availableFuel);
 
         float fuelConsumedPer100Km = car.getAverageFuelConsumption();
-
+        System.out.println(fuelConsumedPer100Km);
 
 
         Vehicle vehicle = new Logan(30, "1987ddkshik289"); // available fuel and chassis number
@@ -65,6 +66,7 @@ public class App {
         Car car2 = (Car) vehicle;
 
         float availableFuel2 = car2.getAvailableFuel();
+        System.out.println(availableFuel2);
 
         float fuelConsumedPer100Km2 = car2.getAverageFuelConsumption();
     }

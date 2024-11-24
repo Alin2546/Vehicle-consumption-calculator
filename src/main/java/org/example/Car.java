@@ -16,6 +16,8 @@ public abstract class Car extends Vehicle {
     private int tireSize;
     private String chassisNumber;
     private int currentGear = 0;
+    private float averageFuelConsumption;
+
 
     public FuelType getFuelType() {
         return fuelType;
@@ -37,7 +39,7 @@ public abstract class Car extends Vehicle {
         return availableFuel;
     }
 
-    public void setAvailableFuel(int availableFuel) {
+    public void setAvailableFuel(float availableFuel) {
         this.availableFuel = availableFuel;
     }
 
@@ -57,6 +59,18 @@ public abstract class Car extends Vehicle {
         this.chassisNumber = chassisNumber;
     }
 
+    public int getCurrentGear() {
+        return currentGear;
+    }
+
+    public void setCurrentGear(int currentGear) {
+        this.currentGear = currentGear;
+    }
+
+    public void setAverageFuelConsumption(float averageFuelConsumption) {
+        this.averageFuelConsumption = averageFuelConsumption;
+    }
+
     public Car(FuelType fuelType, int fuelTankSize, int gears, double consumptionPer100Km, String chassisNumber, int tireSize, int availableFuel) {
         this.fuelType = fuelType;
         this.fuelTankSize = fuelTankSize;
@@ -70,34 +84,91 @@ public abstract class Car extends Vehicle {
 
     @Override
     void start() {
-    this.currentGear = 1;
+        this.availableFuel -= 0.2;
+        this.currentGear = 0;
+        averageFuelConsumption = 0;
     }
 
     @Override
     void stop() {
-        this.currentGear = 0;
+    
     }
 
     @Override
     void drive(double n) {
-        switch (this.currentGear) {
-            case 1:
-                availableFuel -= n;
-                break;
-            case 2:
-                availableFuel -= n;
-                break;
-            case 3:
-                availableFuel -= n;
-                break;
-            case 4:
-                availableFuel -= n;
-                break;
-            case 5:
-                availableFuel -= n;
-                break;
-            default:
-                System.out.println("Please switch the gears from rocket mode to an available gear");
+        if (this.availableFuel <= 0) {
+            System.out.println("Fuel level :" + this.availableFuel);
+            throw new IllegalArgumentException("Empty tank, please refuel");
+        }
+        if (this.tireSize == 15) {
+            switch (this.currentGear) {
+                case 0:
+                    this.availableFuel -= 0.8;
+                    break;
+                case 1:
+                    this.availableFuel -= (n * (this.consumptionPer100Km / 100)) * 5;
+                    break;
+                case 2:
+                    this.availableFuel -= (n * (this.consumptionPer100Km / 100)) * 3;
+                    break;
+                case 3:
+                    this.availableFuel -= (n * (this.consumptionPer100Km / 100)) * 2;
+                    break;
+                case 4:
+                    this.availableFuel -= (n * (this.consumptionPer100Km / 100));
+                    break;
+                case 5:
+                    this.availableFuel -= (n * (this.consumptionPer100Km / 100)) / 2;
+                    break;
+                default:
+                    throw new IllegalArgumentException("You shifted in rocket mode, please chose an available gear");
+            }
+        } else if (this.tireSize == 16) {
+            switch (this.currentGear) {
+                case 0:
+                    this.availableFuel -= 0.8;
+                    break;
+                case 1:
+                    this.availableFuel -= (n * (this.consumptionPer100Km / 100)) * 6;
+                    break;
+                case 2:
+                    this.availableFuel -= (n * (this.consumptionPer100Km / 100)) * 4;
+                    break;
+                case 3:
+                    this.availableFuel -= (n * (this.consumptionPer100Km / 100)) * 3;
+                    break;
+                case 4:
+                    this.availableFuel -= (n * (this.consumptionPer100Km / 100)) + 0.20;
+                    break;
+                case 5:
+                    this.availableFuel -= ((n * (this.consumptionPer100Km / 100)) / 2) + 0.20;
+                    break;
+                default:
+                    throw new IllegalArgumentException("You shifted in rocket mode, please chose an available gear");
+            }
+        } else if (this.tireSize == 17) {
+            switch (this.currentGear) {
+                case 0:
+                    this.availableFuel -= 0.8;
+                    break;
+                case 1:
+                    this.availableFuel -= (n * (this.consumptionPer100Km / 100)) * 7;
+                    break;
+                case 2:
+                    this.availableFuel -= (n * (this.consumptionPer100Km / 100)) * 5;
+                    break;
+                case 3:
+                    this.availableFuel -= (n * (this.consumptionPer100Km / 100)) * 4;
+                    break;
+                case 4:
+                    this.availableFuel -= (n * (this.consumptionPer100Km / 100)) + 0.50;
+                    break;
+                case 5:
+                    this.availableFuel -= ((n * (this.consumptionPer100Km / 100)) / 2) + 0.50;
+                    break;
+                default:
+                    throw new IllegalArgumentException("You shifted in rocket mode, please chose an available gear");
+            }
         }
     }
 
@@ -105,7 +176,8 @@ public abstract class Car extends Vehicle {
         this.currentGear = n;
     }
 
-    float getAverageFuelConsumption() {
-        return 0.000f;
+    public float getAverageFuelConsumption() {
+        return averageFuelConsumption;
     }
+
 }
