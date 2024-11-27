@@ -6,9 +6,9 @@ package org.example;
 public class App {
     public static void main(String[] args) {
 
-       // Car car = new Car(); // this should not compile.
+        // Car car = new Car(); // this should not compile.
 
-      //  Car car = new Dacia(27, "oiqe0934hkkadsn"); // this should not compile! If I want to create a Dacia car, I will need to create an instance of a Dacia model.
+        //  Car car = new Dacia(27, "oiqe0934hkkadsn"); // this should not compile! If I want to create a Dacia car, I will need to create an instance of a Dacia model.
 
         Car car = new Logan(27, "oiqe0934hkkadsn"); // Logan can extend from Dacia, while Dacia extends from Car
 
@@ -51,6 +51,7 @@ public class App {
         float availableFuel = car.getAvailableFuel();
         System.out.println(availableFuel);
 
+
         float fuelConsumedPer100Km = car.getAverageFuelConsumption();
         System.out.println(fuelConsumedPer100Km);
 
@@ -69,5 +70,6 @@ public class App {
         System.out.println(availableFuel2);
 
         float fuelConsumedPer100Km2 = car2.getAverageFuelConsumption();
+        System.out.println(fuelConsumedPer100Km2);
     }
 }
