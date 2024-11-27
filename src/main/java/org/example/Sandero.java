@@ -1,5 +1,8 @@
 package org.example;
 
+/**
+ * Concrete Class representing a Dacia model.
+ */
 public class Sandero extends Dacia {
 
     public Sandero(String chassisNumber, int availableFuel) {
