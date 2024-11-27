@@ -1,14 +1,26 @@
 package org.example;
 
+/**
+ * Concrete Class representing a BMW model.
+ * Inherits common properties and behaviors from the {@code BMW} class.
+ */
 public class M8 extends BMW {
     public M8(String chassisNumber, int availableFuel) {
-        super(FuelType.DIESEL, 75, 8, 12, chassisNumber, 18, availableFuel);
+        super(FuelType.DIESEL, 75, 8, 12, chassisNumber, 17, availableFuel);
     }
 
-    public M8(FuelType fuelType, int fuelTankSize, int gears, double consumptionPer100Km, String chassisNumber, int tireSize, int availableFuel) {
-        super(fuelType, fuelTankSize, gears, consumptionPer100Km, chassisNumber, tireSize, availableFuel);
-    }
-
+    /**
+     * <p>
+     * Provides specific implementation of the {@code drive} because the car has more hp and torque
+     * and thus receives a unique implementation of the drive method.
+     * </p>
+     *
+     * <p>
+     * It's the same implementation as in {@code Car} but with variations which rumps up the fuel consumed.
+     * </p>
+     *
+     * @param n the distance to drive in kilometers
+     */
     @Override
     void drive(double n) {
         setKmDriven(getKmDriven() - n);
